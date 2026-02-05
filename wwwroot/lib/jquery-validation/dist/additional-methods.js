@@ -51,8 +51,8 @@
  */
 $.validator.addMethod( "abaRoutingNumber", function( value ) {
 	var checksum = 0;
-	var tokens = value.split( "" );
-	var length = tokens.length;
+	var ***REMOVED***s = value.split( "" );
+	var length = ***REMOVED***s.length;
 
 	// Length Check
 	if ( length !== 9 ) {
@@ -62,9 +62,9 @@ $.validator.addMethod( "abaRoutingNumber", function( value ) {
 	// Calc the checksum
 	// https://en.wikipedia.org/wiki/ABA_routing_transit_number
 	for ( var i = 0; i < length; i += 3 ) {
-		checksum +=	parseInt( tokens[ i ], 10 )     * 3 +
-					parseInt( tokens[ i + 1 ], 10 ) * 7 +
-					parseInt( tokens[ i + 2 ], 10 );
+		checksum +=	parseInt( ***REMOVED***s[ i ], 10 )     * 3 +
+					parseInt( ***REMOVED***s[ i + 1 ], 10 ) * 7 +
+					parseInt( ***REMOVED***s[ i + 2 ], 10 );
 	}
 
 	// If not zero and divisible by 10 then valid

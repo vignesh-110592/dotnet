@@ -654,7 +654,7 @@ var i,
 	dirruns = 0,
 	done = 0,
 	classCache = createCache(),
-	tokenCache = createCache(),
+	***REMOVED***Cache = createCache(),
 	compilerCache = createCache(),
 	nonnativeSelectorCache = createCache(),
 	sortOrder = function( a, b ) {
@@ -669,7 +669,7 @@ var i,
 
 	// Regular expressions
 
-	// https://www.w3.org/TR/css-syntax-3/#ident-token-diagram
+	// https://www.w3.org/TR/css-syntax-3/#ident-***REMOVED***-diagram
 	identifier = "(?:\\\\[\\da-fA-F]{1,6}" + whitespace +
 		"?|\\\\[^\\r\\n\\f]|[\\w-]|[^\0-\\x7f])+",
 
@@ -685,7 +685,7 @@ var i,
 
 	pseudos = ":(" + identifier + ")(?:\\((" +
 
-		// To reduce the number of selectors needing tokenize in the preFilter, prefer arguments:
+		// To reduce the number of selectors needing ***REMOVED***ize in the preFilter, prefer arguments:
 		// 1. quoted (capture 3; capture 4 or capture 5)
 		"('((?:\\\\.|[^\\\\'])*)'|\"((?:\\\\.|[^\\\\\"])*)\")|" +
 
@@ -910,7 +910,7 @@ function find( selector, context, results, seed ) {
 					}
 
 					// Prefix every selector in the list
-					groups = tokenize( selector );
+					groups = ***REMOVED***ize( selector );
 					i = groups.length;
 					while ( i-- ) {
 						groups[ i ] = ( nid ? "#" + nid : ":scope" ) + " " +
@@ -1615,8 +1615,8 @@ Expr = jQuery.expr = {
 			// Strip excess characters from unquoted arguments
 			} else if ( unquoted && rpseudo.test( unquoted ) &&
 
-				// Get excess from tokenize (recursively)
-				( excess = tokenize( unquoted, true ) ) &&
+				// Get excess from ***REMOVED***ize (recursively)
+				( excess = ***REMOVED***ize( unquoted, true ) ) &&
 
 				// advance to the next closing parenthesis
 				( excess = unquoted.indexOf( ")", unquoted.length - excess ) - unquoted.length ) ) {
@@ -2072,7 +2072,7 @@ Expr = jQuery.expr = {
 Expr.pseudos.nth = Expr.pseudos.eq;
 
 // Add button/input type pseudos
-for ( i in { radio: true, checkbox: true, file: true, password: true, image: true } ) {
+for ( i in { radio: true, checkbox: true, file: true, ***REMOVED***: true, image: true } ) {
 	Expr.pseudos[ i ] = createInputPseudo( i );
 }
 for ( i in { submit: true, reset: true } ) {
@@ -2084,10 +2084,10 @@ function setFilters() {}
 setFilters.prototype = Expr.filters = Expr.pseudos;
 Expr.setFilters = new setFilters();
 
-function tokenize( selector, parseOnly ) {
-	var matched, match, tokens, type,
+function ***REMOVED***ize( selector, parseOnly ) {
+	var matched, match, ***REMOVED***s, type,
 		soFar, groups, preFilters,
-		cached = tokenCache[ selector + " " ];
+		cached = ***REMOVED***Cache[ selector + " " ];
 
 	if ( cached ) {
 		return parseOnly ? 0 : cached.slice( 0 );
@@ -2106,7 +2106,7 @@ function tokenize( selector, parseOnly ) {
 				// Don't consume trailing commas as valid
 				soFar = soFar.slice( match[ 0 ].length ) || soFar;
 			}
-			groups.push( ( tokens = [] ) );
+			groups.push( ( ***REMOVED***s = [] ) );
 		}
 
 		matched = false;
@@ -2114,7 +2114,7 @@ function tokenize( selector, parseOnly ) {
 		// Combinators
 		if ( ( match = rleadingCombinator.exec( soFar ) ) ) {
 			matched = match.shift();
-			tokens.push( {
+			***REMOVED***s.push( {
 				value: matched,
 
 				// Cast descendant combinators to space
@@ -2128,7 +2128,7 @@ function tokenize( selector, parseOnly ) {
 			if ( ( match = matchExpr[ type ].exec( soFar ) ) && ( !preFilters[ type ] ||
 				( match = preFilters[ type ]( match ) ) ) ) {
 				matched = match.shift();
-				tokens.push( {
+				***REMOVED***s.push( {
 					value: matched,
 					type: type,
 					matches: match
@@ -2144,7 +2144,7 @@ function tokenize( selector, parseOnly ) {
 
 	// Return the length of the invalid excess
 	// if we're just parsing
-	// Otherwise, throw an error or return tokens
+	// Otherwise, throw an error or return ***REMOVED***s
 	if ( parseOnly ) {
 		return soFar.length;
 	}
@@ -2152,16 +2152,16 @@ function tokenize( selector, parseOnly ) {
 	return soFar ?
 		find.error( selector ) :
 
-		// Cache the tokens
-		tokenCache( selector, groups ).slice( 0 );
+		// Cache the ***REMOVED***s
+		***REMOVED***Cache( selector, groups ).slice( 0 );
 }
 
-function toSelector( tokens ) {
+function toSelector( ***REMOVED***s ) {
 	var i = 0,
-		len = tokens.length,
+		len = ***REMOVED***s.length,
 		selector = "";
 	for ( ; i < len; i++ ) {
-		selector += tokens[ i ].value;
+		selector += ***REMOVED***s[ i ].value;
 	}
 	return selector;
 }
@@ -2371,10 +2371,10 @@ function setMatcher( preFilter, selector, matcher, postFilter, postFinder, postS
 	} );
 }
 
-function matcherFromTokens( tokens ) {
+function matcherFromTokens( ***REMOVED***s ) {
 	var checkContext, matcher, j,
-		len = tokens.length,
-		leadingRelative = Expr.relative[ tokens[ 0 ].type ],
+		len = ***REMOVED***s.length,
+		leadingRelative = Expr.relative[ ***REMOVED***s[ 0 ].type ],
 		implicitRelative = leadingRelative || Expr.relative[ " " ],
 		i = leadingRelative ? 1 : 0,
 
@@ -2403,10 +2403,10 @@ function matcherFromTokens( tokens ) {
 		} ];
 
 	for ( ; i < len; i++ ) {
-		if ( ( matcher = Expr.relative[ tokens[ i ].type ] ) ) {
+		if ( ( matcher = Expr.relative[ ***REMOVED***s[ i ].type ] ) ) {
 			matchers = [ addCombinator( elementMatcher( matchers ), matcher ) ];
 		} else {
-			matcher = Expr.filter[ tokens[ i ].type ].apply( null, tokens[ i ].matches );
+			matcher = Expr.filter[ ***REMOVED***s[ i ].type ].apply( null, ***REMOVED***s[ i ].matches );
 
 			// Return special upon seeing a positional matcher
 			if ( matcher[ expando ] ) {
@@ -2414,7 +2414,7 @@ function matcherFromTokens( tokens ) {
 				// Find the next relative operator (if any) for proper handling
 				j = ++i;
 				for ( ; j < len; j++ ) {
-					if ( Expr.relative[ tokens[ j ].type ] ) {
+					if ( Expr.relative[ ***REMOVED***s[ j ].type ] ) {
 						break;
 					}
 				}
@@ -2422,14 +2422,14 @@ function matcherFromTokens( tokens ) {
 					i > 1 && elementMatcher( matchers ),
 					i > 1 && toSelector(
 
-						// If the preceding token was a descendant combinator, insert an implicit any-element `*`
-						tokens.slice( 0, i - 1 )
-							.concat( { value: tokens[ i - 2 ].type === " " ? "*" : "" } )
+						// If the preceding ***REMOVED*** was a descendant combinator, insert an implicit any-element `*`
+						***REMOVED***s.slice( 0, i - 1 )
+							.concat( { value: ***REMOVED***s[ i - 2 ].type === " " ? "*" : "" } )
 					).replace( rtrimCSS, "$1" ),
 					matcher,
-					i < j && matcherFromTokens( tokens.slice( i, j ) ),
-					j < len && matcherFromTokens( ( tokens = tokens.slice( j ) ) ),
-					j < len && toSelector( tokens )
+					i < j && matcherFromTokens( ***REMOVED***s.slice( i, j ) ),
+					j < len && matcherFromTokens( ( ***REMOVED***s = ***REMOVED***s.slice( j ) ) ),
+					j < len && toSelector( ***REMOVED***s )
 				);
 			}
 			matchers.push( matcher );
@@ -2575,7 +2575,7 @@ function compile( selector, match /* Internal Use Only */ ) {
 
 		// Generate a function of recursive functions that can be used to check each element
 		if ( !match ) {
-			match = tokenize( selector );
+			match = ***REMOVED***ize( selector );
 		}
 		i = match.length;
 		while ( i-- ) {
@@ -2591,7 +2591,7 @@ function compile( selector, match /* Internal Use Only */ ) {
 		cached = compilerCache( selector,
 			matcherFromGroupMatchers( elementMatchers, setMatchers ) );
 
-		// Save selector and tokenization
+		// Save selector and ***REMOVED***ization
 		cached.selector = selector;
 	}
 	return cached;
@@ -2607,9 +2607,9 @@ function compile( selector, match /* Internal Use Only */ ) {
  * @param {Array} [seed] A set of elements to match against
  */
 function select( selector, context, results, seed ) {
-	var i, tokens, token, type, find,
+	var i, ***REMOVED***s, ***REMOVED***, type, find,
 		compiled = typeof selector === "function" && selector,
-		match = !seed && tokenize( ( selector = compiled.selector || selector ) );
+		match = !seed && ***REMOVED***ize( ( selector = compiled.selector || selector ) );
 
 	results = results || [];
 
@@ -2618,12 +2618,12 @@ function select( selector, context, results, seed ) {
 	if ( match.length === 1 ) {
 
 		// Reduce context if the leading compound selector is an ID
-		tokens = match[ 0 ] = match[ 0 ].slice( 0 );
-		if ( tokens.length > 2 && ( token = tokens[ 0 ] ).type === "ID" &&
-				context.nodeType === 9 && documentIsHTML && Expr.relative[ tokens[ 1 ].type ] ) {
+		***REMOVED***s = match[ 0 ] = match[ 0 ].slice( 0 );
+		if ( ***REMOVED***s.length > 2 && ( ***REMOVED*** = ***REMOVED***s[ 0 ] ).type === "ID" &&
+				context.nodeType === 9 && documentIsHTML && Expr.relative[ ***REMOVED***s[ 1 ].type ] ) {
 
 			context = ( Expr.find.ID(
-				token.matches[ 0 ].replace( runescape, funescape ),
+				***REMOVED***.matches[ 0 ].replace( runescape, funescape ),
 				context
 			) || [] )[ 0 ];
 			if ( !context ) {
@@ -2634,30 +2634,30 @@ function select( selector, context, results, seed ) {
 				context = context.parentNode;
 			}
 
-			selector = selector.slice( tokens.shift().value.length );
+			selector = selector.slice( ***REMOVED***s.shift().value.length );
 		}
 
 		// Fetch a seed set for right-to-left matching
-		i = matchExpr.needsContext.test( selector ) ? 0 : tokens.length;
+		i = matchExpr.needsContext.test( selector ) ? 0 : ***REMOVED***s.length;
 		while ( i-- ) {
-			token = tokens[ i ];
+			***REMOVED*** = ***REMOVED***s[ i ];
 
 			// Abort if we hit a combinator
-			if ( Expr.relative[ ( type = token.type ) ] ) {
+			if ( Expr.relative[ ( type = ***REMOVED***.type ) ] ) {
 				break;
 			}
 			if ( ( find = Expr.find[ type ] ) ) {
 
 				// Search, expanding context for leading sibling combinators
 				if ( ( seed = find(
-					token.matches[ 0 ].replace( runescape, funescape ),
-					rsibling.test( tokens[ 0 ].type ) &&
+					***REMOVED***.matches[ 0 ].replace( runescape, funescape ),
+					rsibling.test( ***REMOVED***s[ 0 ].type ) &&
 						testContext( context.parentNode ) || context
 				) ) ) {
 
-					// If seed is empty or no tokens remain, we can return early
-					tokens.splice( i, 1 );
-					selector = seed.length && toSelector( tokens );
+					// If seed is empty or no ***REMOVED***s remain, we can return early
+					***REMOVED***s.splice( i, 1 );
+					selector = seed.length && toSelector( ***REMOVED***s );
 					if ( !selector ) {
 						push.apply( results, seed );
 						return results;
@@ -2670,7 +2670,7 @@ function select( selector, context, results, seed ) {
 	}
 
 	// Compile and execute a filtering function if one is not provided
-	// Provide `match` to avoid retokenization if we modified the selector above
+	// Provide `match` to avoid re***REMOVED***ization if we modified the selector above
 	( compiled || compile( selector, match ) )(
 		seed,
 		context,
@@ -2709,7 +2709,7 @@ jQuery.unique = jQuery.uniqueSort;
 find.compile = compile;
 find.select = select;
 find.setDocument = setDocument;
-find.tokenize = tokenize;
+find.***REMOVED***ize = ***REMOVED***ize;
 
 find.escape = jQuery.escapeSelector;
 find.getText = jQuery.text;
@@ -8134,8 +8134,8 @@ jQuery.each( [
 	// Strip and collapse whitespace according to HTML spec
 	// https://infra.spec.whatwg.org/#strip-and-collapse-ascii-whitespace
 	function stripAndCollapse( value ) {
-		var tokens = value.match( rnothtmlwhite ) || [];
-		return tokens.join( " " );
+		var ***REMOVED***s = value.match( rnothtmlwhite ) || [];
+		return ***REMOVED***s.join( " " );
 	}
 
 
@@ -9135,7 +9135,7 @@ jQuery.extend( {
 		data: null,
 		dataType: null,
 		username: null,
-		password: null,
+		***REMOVED***: null,
 		cache: null,
 		throws: false,
 		traditional: false,
@@ -9830,7 +9830,7 @@ jQuery.ajaxTransport( function( options ) {
 					options.url,
 					options.async,
 					options.username,
-					options.password
+					options.***REMOVED***
 				);
 
 				// Apply custom fields if provided
